@@ -8,9 +8,15 @@
 import java.util.Arrays;
 import java.util.Comparator;
 
+/**
+ * Основний клас Lab3 для демонстрації роботи з об'єктами класу BuildingBlock.
+ * Програма створює масив об'єктів, сортує його за кількома критеріями та виконує пошук заданого об'єкта.
+ */
 public class Lab3 {
 
-    // Клас будівельного блоку
+    /**
+     * Клас BuildingBlock представляє будівельний блок, що містить характеристики блоку, такі як тип, міцність, вага, колір та вартість.
+     */
     static class BuildingBlock {
         private String type; // Тип блоку (наприклад, "Дерево", "Камінь")
         private int durability; // Міцність блоку
@@ -18,7 +24,14 @@ public class Lab3 {
         private String color; // Колір блоку
         private double cost; // Вартість блоку
 
-        // Конструктор класу
+        /**
+         * Конструктор для створення об'єкта BuildingBlock.
+         * @param type Тип блоку.
+         * @param durability Міцність блоку.
+         * @param weight Вага блоку.
+         * @param color Колір блоку.
+         * @param cost Вартість блоку.
+         */
         public BuildingBlock(String type, int durability, double weight, String color, double cost) {
             this.type = type;
             this.durability = durability;
@@ -48,7 +61,11 @@ public class Lab3 {
             return cost;
         }
 
-        // Метод для перевірки еквівалентності об'єктів
+        /**
+         * Перевизначення методу equals для порівняння об'єктів BuildingBlock.
+         * @param obj Об'єкт для порівняння.
+         * @return true, якщо об'єкти рівні, інакше false.
+         */
         @Override
         public boolean equals(Object obj) {
             if (this == obj) return true;
@@ -61,7 +78,10 @@ public class Lab3 {
                     color.equals(that.color);
         }
 
-        // Метод для виводу інформації про об'єкт
+        /**
+         * Перевизначення методу toString для відображення інформації про об'єкт у вигляді рядка.
+         * @return Рядок, що містить інформацію про об'єкт.
+         */
         @Override
         public String toString() {
             return "BuildingBlock{" +
@@ -74,8 +94,12 @@ public class Lab3 {
         }
     }
 
+    /**
+     * Головний метод програми, що виконує сортування масиву об'єктів BuildingBlock та пошук заданого об'єкта.
+     * @param args Аргументи командного рядка.
+     */
     public static void main(String[] args) {
-        // Створення масиву об'єктів BuildingBlock
+        // Створення масиву об'єктів BuildingBlock з різними характеристиками
         BuildingBlock[] blocks = {
                 new BuildingBlock("Дерево", 100, 15.5, "Коричневий", 20.0),
                 new BuildingBlock("Камінь", 300, 50.0, "Сірий", 35.5),
@@ -84,11 +108,11 @@ public class Lab3 {
                 new BuildingBlock("Залізо", 250, 40.0, "Сірий", 50.0)
         };
 
-        // Сортування масиву за вагою за зростанням і за міцністю за спаданням
+        // Сортування масиву за вагою (за зростанням) та за міцністю (за спаданням)
         Arrays.sort(blocks, Comparator.comparingDouble(BuildingBlock::getWeight)
                 .thenComparing(Comparator.comparingInt(BuildingBlock::getDurability).reversed()));
 
-        // Вивід відсортованого масиву
+        // Вивід відсортованого масиву на екран
         System.out.println("Відсортований масив:");
         for (BuildingBlock block : blocks) {
             System.out.println(block);
@@ -97,6 +121,8 @@ public class Lab3 {
         // Пошук заданого об'єкта в масиві
         BuildingBlock searchBlock = new BuildingBlock("Залізо", 250, 40.0, "Сірий", 50.0);
         boolean found = false;
+
+        // Пошук об'єкта у відсортованому масиві за допомогою методу equals
         for (BuildingBlock block : blocks) {
             if (block.equals(searchBlock)) {
                 found = true;
@@ -105,11 +131,13 @@ public class Lab3 {
             }
         }
 
+        // Вивід результату пошуку
         if (!found) {
             System.out.println("Об'єкт не знайдений у масиві.");
         }
     }
 }
+
 
 // Програма створює об'єкт searchBlock, характеристики якого відповідають одному з об'єктів у масиві. Пошук виконується шляхом порівняння кожного об'єкта з цим заданим за допомогою методу equals. Якщо об'єкт знайдено, він виводиться на екран. У разі, якщо об'єкт відсутній, виводиться повідомлення про це.
 
